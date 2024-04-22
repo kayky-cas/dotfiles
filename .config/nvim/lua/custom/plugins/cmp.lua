@@ -28,23 +28,6 @@ return { -- Autocompletion
     --    for various frameworks/libraries/etc. but you will have to
     --    set up the ones that are useful for you.
     -- 'rafamadriz/friendly-snippets',
-
-    {
-      'zbirenbaum/copilot-cmp',
-      config = function()
-        require('copilot_cmp').setup()
-      end,
-      dependencies = {
-        {
-          'zbirenbaum/copilot.lua',
-          cmd = 'Copilot',
-          event = 'InsertEnter',
-          config = function()
-            require('copilot').setup {}
-          end,
-        },
-      },
-    },
   },
   config = function()
     -- See `:help cmp`

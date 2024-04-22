@@ -106,7 +106,7 @@ export NVM_DIR="$HOME/.nvm"
 
 alias v=nvim
 
-if [[ "$(uname)" == "Linux\n" ]]; then
+if [[ "$(uname)" == "Linux" ]]; then
     if ! pgrep -u "$USER" ssh-agent > /dev/null; then
         ssh-agent -t 1h > "$XDG_RUNTIME_DIR/ssh-agent.env"
     fi

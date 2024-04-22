@@ -118,6 +118,11 @@ vim.opt.clipboard = 'unnamedplus'
 -- Enable break indent
 vim.opt.breakindent = true
 
+vim.bo.tabstop = 4
+vim.bo.shiftwidth = 4
+vim.bo.expandtab = true
+vim.bo.softtabstop = 4
+
 -- Save undo history
 vim.opt.undofile = true
 
@@ -537,15 +542,7 @@ require('lazy').setup({
         -- clangd = {},
         gopls = {},
         -- pyright = {},
-        rust_analyzer = {
-          settings = {
-            ['rust-analyzer'] = {
-              check = {
-                command = 'clippy',
-              },
-            },
-          },
-        },
+        -- rust_analyzer = {},
         -- ... etc. See `:help lspconfig-all` for a list of all the pre-configured LSPs
         --
         -- Some languages (like typescript) have entire language plugins that can be useful:
@@ -581,6 +578,8 @@ require('lazy').setup({
           },
         },
         slint_lsp = {},
+        zls = {},
+        clangd = {},
       }
 
       -- Ensure the servers and tools above are installed
@@ -603,6 +602,19 @@ require('lazy').setup({
 
       require('lspconfig').dafny.setup {
         capabilities = capabilities,
+      }
+
+      require('lspconfig').rust_analyzer.setup {
+        settings = {
+          ['rust-analyzer'] = {
+            cargo = {
+              allFeatures = true,
+            },
+            check = {
+              command = 'clippy',
+            },
+          },
+        },
       }
 
       require('mason-lspconfig').setup {
