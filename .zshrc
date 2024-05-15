@@ -114,3 +114,6 @@ if [[ "$(uname)" == "Linux" ]]; then
         source "$XDG_RUNTIME_DIR/ssh-agent.env" >/dev/null
     fi
 fi
+
+# opam configuration
+[[ ! -r /home/kayky/.opam/opam-init/init.zsh ]] || source /home/kayky/.opam/opam-init/init.zsh  > /dev/null 2> /dev/null

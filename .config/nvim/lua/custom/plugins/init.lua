@@ -16,4 +16,5 @@ return {
       vim.cmd [[let g:syntastic_dafny_dafny_args = '-allowGlobals']]
     end,
   },
+  { 'shortcuts/no-neck-pain.nvim' },
 }
