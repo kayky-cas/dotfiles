@@ -28,6 +28,25 @@ return { -- Autocompletion
     --    for various frameworks/libraries/etc. but you will have to
     --    set up the ones that are useful for you.
     -- 'rafamadriz/friendly-snippets',
+    {
+      dependencies = {
+        {
+          'zbirenbaum/copilot.lua',
+          cmd = 'Copilot',
+          event = 'InsertEnter',
+          config = function()
+            require('copilot').setup {
+              suggestion = { enabled = false },
+              panel = { enabled = false },
+            }
+          end,
+        },
+      },
+      'zbirenbaum/copilot-cmp',
+      config = function()
+        require('copilot_cmp').setup()
+      end,
+    },
   },
   config = function()
     -- See `:help cmp`
@@ -86,7 +105,7 @@ return { -- Autocompletion
         { name = 'nvim_lsp' },
         { name = 'luasnip' },
         { name = 'path' },
-        -- { name = 'copilot' },
+        { name = 'copilot' },
       },
     }
   end,

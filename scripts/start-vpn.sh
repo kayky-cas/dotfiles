@@ -1,1 +1,1 @@
-sudo gpclient connect --default-browser vpn.e-unicred.com.br
+sudo gpclient connect --portal vpn.e-unicred.com.br
