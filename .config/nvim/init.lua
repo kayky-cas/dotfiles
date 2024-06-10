@@ -241,9 +241,6 @@ require('lazy').setup({
   --  This is equivalent to:
   --    require('Comment').setup({})
 
-  -- "gc" to comment visual regions/lines
-  { 'numToStr/Comment.nvim', opts = {} },
-
   -- Here is a more advanced example where we pass configuration
   -- options to `gitsigns.nvim`. This is equivalent to the following lua:
   --    require('gitsigns').setup({ ... })
@@ -417,6 +414,29 @@ require('lazy').setup({
       -- Useful status updates for LSP.
       -- NOTE: `opts = {}` is the same as calling `require('fidget').setup({})`
       { 'j-hui/fidget.nvim', opts = {} },
+
+      {
+        'nvim-java/nvim-java',
+        dependencies = {
+          'nvim-java/lua-async-await',
+          'nvim-java/nvim-java-refactor',
+          'nvim-java/nvim-java-core',
+          'nvim-java/nvim-java-test',
+          'nvim-java/nvim-java-dap',
+          'MunifTanjim/nui.nvim',
+          'neovim/nvim-lspconfig',
+          'mfussenegger/nvim-dap',
+          {
+            'williamboman/mason.nvim',
+            opts = {
+              registries = {
+                'github:nvim-java/mason-registry',
+                'github:mason-org/mason-registry',
+              },
+            },
+          },
+        },
+      },
     },
     config = function()
       -- Brief Aside: **What is LSP?**
@@ -472,6 +492,8 @@ require('lazy').setup({
           -- Jump to the implementation of the word under your cursor.
           --  Useful when your language has ways of declaring types without an actual implementation.
           map('gI', require('telescope.builtin').lsp_implementations, '[G]oto [I]mplementation')
+
+          map('<leader>i', vim.lsp.inlay_hint.enable, '[G]oto [I]mplementation')
 
           -- Jump to the type of the word under your cursor.
           --  Useful when you're not sure what type a variable is and you want to see
@@ -551,6 +573,7 @@ require('lazy').setup({
         -- But for many setups, the LSP (`tsserver`) will work just fine
         -- tsserver = {},
         --
+        ocamllsp = {},
         lua_ls = {
           -- cmd = {...},
           -- filetypes { ...},
@@ -582,6 +605,8 @@ require('lazy').setup({
         clangd = {},
       }
 
+      require('java').setup()
+
       -- Ensure the servers and tools above are installed
       --  To check the current status of installed tools and/or manually install
       --  other tools, you can run
@@ -601,6 +626,10 @@ require('lazy').setup({
       require('lspconfig').dartls.setup { capabilities = capabilities }
 
       require('lspconfig').dafny.setup {
+        capabilities = capabilities,
+      }
+
+      require('lspconfig').jdtls.setup {
         capabilities = capabilities,
       }
 
@@ -648,6 +677,7 @@ require('lazy').setup({
         -- You can use a sub-list to tell conform to run *until* a formatter
         -- is found.
         -- javascript = { { "prettierd", "prettier" } },
+        ocaml = { 'ocamlformat' },
       },
     },
   },
@@ -664,7 +694,7 @@ require('lazy').setup({
   --     -- Like many other themes, this one has different styles, and you could load
   --     -- any other, such as 'tokyonight-storm', 'tokyonight-moon', or 'tokyonight-day'.
   --     vim.cmd.colorscheme 'tokyonight-night'
-
+  --
   --     -- You can configure highlights by doing something like
   --     vim.cmd.hi 'Comment gui=none'
   --   end,

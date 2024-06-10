@@ -100,10 +100,6 @@ source $ZSH/oh-my-zsh.sh
 # alias zshconfig="mate ~/.zshrc"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
 
-export NVM_DIR="$HOME/.nvm"
-[ -s "/opt/homebrew/opt/nvm/nvm.sh" ] && \. "/opt/homebrew/opt/nvm/nvm.sh"  # This loads nvm
-[ -s "/opt/homebrew/opt/nvm/etc/bash_completion.d/nvm" ] && \. "/opt/homebrew/opt/nvm/etc/bash_completion.d/nvm"  # This loads nvm bash_completion
-
 alias v=nvim
 
 if [[ "$(uname)" == "Linux" ]]; then
@@ -119,5 +115,3 @@ fi
 [[ ! -r /home/kayky/.opam/opam-init/init.zsh ]] || source /home/kayky/.opam/opam-init/init.zsh  > /dev/null 2> /dev/null
 
 alias vpn=~/scripts/start-vpn.sh
-
-export PATH="$PATH:/opt/nvim-linux64/bin"
