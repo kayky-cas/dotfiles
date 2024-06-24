@@ -106,7 +106,8 @@
 # ]
 
 # open terminal, blazingly fast compared to iTerm/Hyper
-cmd - return : /opt/homebrew/bin/kitty ~/scripts/tmux-init.sh
+# cmd - return : /opt/homebrew/bin/kitty
+cmd - return : /opt/homebrew/bin/alacritty
 
 # open qutebrowser
 cmd + shift - return : ~/Scripts/qtb.sh

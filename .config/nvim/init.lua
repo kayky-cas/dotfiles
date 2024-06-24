@@ -123,6 +123,11 @@ vim.opt.tabstop = 4
 -- vim.opt.expandtab = true
 -- vim.opt.softtabstop = 4
 
+local home = os.getenv 'HOME'
+-- local ocaml_indent = home .. '/.opam/default/share/ocp-indent/vim'
+
+vim.cmd(string.format([[set rtp^="%s"]], ocaml_indent))
+
 -- Save undo history
 vim.opt.undofile = true
 
@@ -493,7 +498,10 @@ require('lazy').setup({
           --  Useful when your language has ways of declaring types without an actual implementation.
           map('gI', require('telescope.builtin').lsp_implementations, '[G]oto [I]mplementation')
 
-          map('<leader>i', vim.lsp.inlay_hint.enable, '[G]oto [I]mplementation')
+          map('<leader>i', function()
+            local is_enable = vim.lsp.inlay_hint.is_enabled()
+            vim.lsp.inlay_hint.enable(not is_enable)
+          end, '[G]oto [I]mplementation')
 
           -- Jump to the type of the word under your cursor.
           --  Useful when you're not sure what type a variable is and you want to see

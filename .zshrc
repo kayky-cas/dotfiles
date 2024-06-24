@@ -112,6 +112,10 @@ if [[ "$(uname)" == "Linux" ]]; then
 fi
 
 # opam configuration
-[[ ! -r /home/kayky/.opam/opam-init/init.zsh ]] || source /home/kayky/.opam/opam-init/init.zsh  > /dev/null 2> /dev/null
+[[ ! -r $HOME/.opam/opam-init/init.zsh ]] || source $HOME/.opam/opam-init/init.zsh  > /dev/null 2> /dev/null
 
 alias vpn=~/scripts/start-vpn.sh
+
+if [ -z "$TMUX" ]; then
+    ~/scripts/tmux-init.sh
+fi
