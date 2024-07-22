@@ -1,4 +1,4 @@
-local on_attach_callback = function(event)
+local function on_attach_callback(event)
 	local map = function(keys, func, desc)
 		vim.keymap.set("n", keys, func, { buffer = event.buf, desc = "LSP: " .. desc })
 	end
@@ -66,6 +66,21 @@ local on_attach_callback = function(event)
 	end
 end
 
+local function rust_analyzer_setup(lsp_config)
+	lsp_config.rust_analyzer.setup({
+		settings = {
+			["rust-analyzer"] = {
+				cargo = {
+					allFeatures = true,
+				},
+				check = {
+					command = "clippy",
+				},
+			},
+		},
+	})
+end
+
 return { -- LSP Configuration & Plugins
 	"neovim/nvim-lspconfig",
 	dependencies = {
@@ -99,7 +114,17 @@ return { -- LSP Configuration & Plugins
 		--        For example, to see the options for `lua_ls`, you could go to: https://luals.github.io/wiki/settings/
 		local servers = {
 			-- clangd = {},
-			gopls = {},
+			gopls = {
+				hints = {
+					assignVariableTypes = true,
+					compositeLiteralFields = true,
+					compositeLiteralTypes = true,
+					constantValues = true,
+					functionTypeParameters = true,
+					parameterNames = true,
+					rangeVariableTypes = true,
+				},
+			},
 			-- pyright = {},
 			-- rust_analyzer = {},
 			-- ... etc. See `:help lspconfig-all` for a list of all the pre-configured LSPs
@@ -138,7 +163,6 @@ return { -- LSP Configuration & Plugins
 				},
 			},
 			zls = {},
-			clangd = {},
 		}
 
 		-- Ensure the servers and tools above are installed
@@ -155,29 +179,30 @@ return { -- LSP Configuration & Plugins
 		vim.list_extend(ensure_installed, {
 			"stylua", -- Used to format lua code
 		})
+
 		require("mason-tool-installer").setup({ ensure_installed = ensure_installed })
 
-		require("lspconfig").dartls.setup({ capabilities = capabilities })
+		local lsp_config = require("lspconfig")
 
-		require("lspconfig").dafny.setup({
+		lsp_config.dartls.setup({ capabilities = capabilities })
+
+		lsp_config.dafny.setup({
 			capabilities = capabilities,
 		})
 
-		require("lspconfig").jdtls.setup({
+		rust_analyzer_setup(lsp_config)
+
+		lsp_config.sourcekit.setup({
 			capabilities = capabilities,
 		})
 
-		require("lspconfig").rust_analyzer.setup({
-			settings = {
-				["rust-analyzer"] = {
-					cargo = {
-						allFeatures = true,
-					},
-					check = {
-						command = "clippy",
-					},
-				},
-			},
+		lsp_config.tsserver.setup({
+			cmd = { "npx", "typescript-language-server", "--stdio" },
+			capabilities = capabilities,
+		})
+
+		require("lspconfig").hls.setup({
+			capabilities = capabilities,
 		})
 
 		require("mason-lspconfig").setup({

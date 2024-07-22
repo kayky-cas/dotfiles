@@ -111,6 +111,8 @@ if [[ "$(uname)" == "Linux" ]]; then
     fi
 fi
 
+export PATH="$HOME/bin:$PATH"
+
 # opam configuration
 [[ ! -r $HOME/.opam/opam-init/init.zsh ]] || source $HOME/.opam/opam-init/init.zsh  > /dev/null 2> /dev/null
 
@@ -119,3 +121,11 @@ alias vpn=~/scripts/start-vpn.sh
 if [ -z "$TMUX" ]; then
     ~/scripts/tmux-init.sh
 fi
+
+[ -f "/Users/kayky/.ghcup/env" ] && . "/Users/kayky/.ghcup/env" # ghcup-env
+# bun completions
+[ -s "/Users/kayky/.bun/_bun" ] && source "/Users/kayky/.bun/_bun"
+
+# bun
+export BUN_INSTALL="$HOME/.bun"
+export PATH="$BUN_INSTALL/bin:$PATH"
