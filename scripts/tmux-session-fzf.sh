@@ -1,4 +1,4 @@
-folder=$(fd . ~ --type directory | fzf)
+folder=$(fd . ~ --type directory | fzf | sed 's|/$||')
 folder_name=$(basename "$folder")
 
 if [ -n "$folder" ]; then

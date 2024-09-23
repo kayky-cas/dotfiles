@@ -163,6 +163,9 @@ return { -- LSP Configuration & Plugins
 				},
 			},
 			zls = {},
+			jdtls = {},
+			dockerls = {},
+			docker_compose_language_service = {},
 		}
 
 		-- Ensure the servers and tools above are installed
@@ -201,7 +204,7 @@ return { -- LSP Configuration & Plugins
 			capabilities = capabilities,
 		})
 
-		require("lspconfig").hls.setup({
+		lsp_config.hls.setup({
 			capabilities = capabilities,
 		})
 
