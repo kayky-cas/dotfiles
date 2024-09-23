@@ -111,6 +111,8 @@ if [[ "$(uname)" == "Linux" ]]; then
     fi
 fi
 
+export PATH="$HOME/bin:$PATH"
+
 # opam configuration
 [[ ! -r $HOME/.opam/opam-init/init.zsh ]] || source $HOME/.opam/opam-init/init.zsh  > /dev/null 2> /dev/null
 
@@ -123,3 +125,11 @@ fi
 export NVM_DIR="$HOME/.nvm"
   [ -s "/opt/homebrew/opt/nvm/nvm.sh" ] && \. "/opt/homebrew/opt/nvm/nvm.sh"  # This loads nvm
   [ -s "/opt/homebrew/opt/nvm/etc/bash_completion.d/nvm" ] && \. "/opt/homebrew/opt/nvm/etc/bash_completion.d/nvm"  # This loads nvm bash_completion
+=======
+[ -f "/Users/kayky/.ghcup/env" ] && . "/Users/kayky/.ghcup/env" # ghcup-env
+# bun completions
+[ -s "/Users/kayky/.bun/_bun" ] && source "/Users/kayky/.bun/_bun"
+
+# bun
+export BUN_INSTALL="$HOME/.bun"
+export PATH="$BUN_INSTALL/bin:$PATH"

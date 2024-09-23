@@ -1,4 +1,4 @@
-folder=$(find ~ -type d -print | fzf)
+folder=$(fd . ~ --type directory | fzf)
 folder_name=$(basename "$folder")
 
 if [ -n "$folder" ]; then

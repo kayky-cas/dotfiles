@@ -18,4 +18,5 @@ return {
 		end,
 		opts = ...,
 	},
+	"christoomey/vim-tmux-navigator",
 }
