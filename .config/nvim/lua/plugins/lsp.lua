@@ -166,6 +166,7 @@ return { -- LSP Configuration & Plugins
 			jdtls = {},
 			dockerls = {},
 			docker_compose_language_service = {},
+			ols = {},
 		}
 
 		-- Ensure the servers and tools above are installed
@@ -199,7 +200,7 @@ return { -- LSP Configuration & Plugins
 			capabilities = capabilities,
 		})
 
-		lsp_config.tsserver.setup({
+		lsp_config.ts_ls.setup({
 			cmd = { "npx", "typescript-language-server", "--stdio" },
 			capabilities = capabilities,
 		})

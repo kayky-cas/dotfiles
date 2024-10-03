@@ -125,11 +125,13 @@ fi
 export NVM_DIR="$HOME/.nvm"
   [ -s "/opt/homebrew/opt/nvm/nvm.sh" ] && \. "/opt/homebrew/opt/nvm/nvm.sh"  # This loads nvm
   [ -s "/opt/homebrew/opt/nvm/etc/bash_completion.d/nvm" ] && \. "/opt/homebrew/opt/nvm/etc/bash_completion.d/nvm"  # This loads nvm bash_completion
-=======
-[ -f "/Users/kayky/.ghcup/env" ] && . "/Users/kayky/.ghcup/env" # ghcup-env
-# bun completions
-[ -s "/Users/kayky/.bun/_bun" ] && source "/Users/kayky/.bun/_bun"
 
 # bun
 export BUN_INSTALL="$HOME/.bun"
 export PATH="$BUN_INSTALL/bin:$PATH"
+
+[ -f "/Users/kayky/.ghcup/env" ] && . "/Users/kayky/.ghcup/env" # ghcup-env
+
+cdf() {
+    cd $(fd . ~ --type directory | fzf)
+}

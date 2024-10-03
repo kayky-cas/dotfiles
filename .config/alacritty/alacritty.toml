@@ -12,5 +12,5 @@ size = 16
 family = "JetBrainsMono Nerd Font Mono"
 style = "Regular"
 
-[colors.primary]
-background = "#282828"
+# [colors.primary]
+# background = "#282828"
